@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+const userRoutes = require('./routes/user');
 const stuffRoutes = require('./routes/stuff');
 const app = express();
 
@@ -22,5 +23,6 @@ mongoose.connect('mongodb+srv://ecar:gofullstack@cluster0.jq0v6.mongodb.net/myFi
   app.use(bodyParser.json());
 
 app.use('/api/stuff', stuffRoutes);
+app.use('/api/auth', userRoutes);
 
 module.exports = app;
