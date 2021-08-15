@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const path = require('path');
 
 const userRoutes = require('./routes/users');
 const stuffRoutes = require('./routes/stuff');
@@ -21,6 +22,8 @@ mongoose.connect('mongodb+srv://ecar:gofullstack@cluster0.jq0v6.mongodb.net/myFi
   });
   
   app.use(bodyParser.json());
+
+  app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use('/api/stuff', stuffRoutes);
 app.use('/api/auth', userRoutes);
