@@ -2,21 +2,17 @@ const express = require('express');
 const router = express.Router();
 
 const auth = require('../middleware/auth');
-const Thing = require('../models/thing');
 const multer = require('../middleware/multer-config');
-
 
 const stuffCtrl = require('../controllers/stuff');
 
 router.get('/', auth, stuffCtrl.getAllStuff);
 router.post('/', auth, multer, stuffCtrl.createThing);
-router.post('/', auth, stuffCtrl.createThing);
 router.get('/:id', auth, stuffCtrl.getOneThing);
-router.put('/:id', auth, stuffCtrl.modifyThing);
+router.put('/:id', auth, multer, stuffCtrl.modifyThing);
 router.delete('/:id', auth, stuffCtrl.deleteThing);
 
 module.exports = router;
-
 router.post('/', (req, res, next) => {
   const thing = new Thing({
     title: req.body.title,
